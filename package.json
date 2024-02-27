@@ -1,0 +1,23 @@
+{
+  "name": "e-commerce-be",
+  "version": "1.0.0",
+  "description": "E-commerce project in BE. First project in BE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "mongoDB",
+    "mongoose"
+  ],
+  "author": "Ashish Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.0"
+  }
+}
