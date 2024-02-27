@@ -3,11 +3,13 @@
  */
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
 const indexConfig = require("./configs/index.config.js");
 const dbConfig = require("./configs/db.config.js");
 const userModel = require("./models/user.model.js");
 const bcryptjs = require("bcryptjs")
+const app = express();
+
+app.use(express.json()) // Convert JSON to js object
 
 /**
  * Create a admin user at the starting of the application
@@ -48,6 +50,12 @@ async function init() {
     console.log("Error while getting/create admin",error)
   }
 }
+
+/**
+ * Stich the route with server (index.js)
+ */
+
+require('./routes/auth.routes.js')(app)
 
 /**
  * Start the server
