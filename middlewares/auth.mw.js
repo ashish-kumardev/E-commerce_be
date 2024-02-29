@@ -1,4 +1,5 @@
 const userModel = require("../models/user.model.js");
+const bcryptjs = require("bcryptjs");
 
 /**
  * Create a mw will check if a request body is correct or not
@@ -52,6 +53,50 @@ exports.verifySignUpRequestBody = async (req, res, next) => {
     res.status(500).send({
       success: false,
       message: "Error while verify request body for sign up",
+    });
+  }
+};
+
+exports.verifySignInRequestBody = async (req, res, next) => {
+  try {
+    if (!req.body.userId)
+      return res.status(400).send({
+        success: false,
+        message: "Failed ! userId was not provided",
+      });
+
+    if (!req.body.password)
+      return res.status(400).send({
+        success: false,
+        message: "Failed ! password was not provided",
+      });
+
+    const userObj = {
+      userId: req.body.userId,
+      password: req.body.password
+    };
+
+    const isUserPresent = await userModel.findOne({ userId: userObj.userId });
+
+    if (!isUserPresent?.password)
+      return res.status(400).send({
+        success: false,
+        message: "Failed ! user not found",
+      });
+
+    const isPasswordMatch = await bcryptjs.compare(userObj.password, isUserPresent.password)
+    if (!isPasswordMatch)
+      return res.status(400).send({
+        success: false,
+        message: "Failed ! password not correct",
+      });
+
+    next();
+  } catch (error) {
+    console.log("Error while verify signin details", error);
+    res.status(500).send({
+      success: false,
+      message: "Error while verify signin details",
     });
   }
 };

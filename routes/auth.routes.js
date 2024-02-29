@@ -10,4 +10,6 @@ const authMiddleware = require('../middlewares/auth.mw.js')
 
 module.exports = (app) => {
   app.post("/ecomm/api/v1/auth/signup",[authMiddleware.verifySignUpRequestBody],authController.signup)
+
+  app.post("/ecomm/api/v1/auth/signin",[authMiddleware.verifySignInRequestBody],authController.signin)
 }
