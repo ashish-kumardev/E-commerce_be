@@ -71,26 +71,6 @@ exports.verifySignInRequestBody = async (req, res, next) => {
         message: "Failed ! password was not provided",
       });
 
-    const userObj = {
-      userId: req.body.userId,
-      password: req.body.password
-    };
-
-    const isUserPresent = await userModel.findOne({ userId: userObj.userId });
-
-    if (!isUserPresent?.password)
-      return res.status(400).send({
-        success: false,
-        message: "Failed ! user not found",
-      });
-
-    const isPasswordMatch = await bcryptjs.compare(userObj.password, isUserPresent.password)
-    if (!isPasswordMatch)
-      return res.status(400).send({
-        success: false,
-        message: "Failed ! password not correct",
-      });
-
     next();
   } catch (error) {
     console.log("Error while verify signin details", error);

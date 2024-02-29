@@ -3,5 +3,5 @@
  */
 
 module.exports = {
-  PORT : 3005
-}
+  PORT: 3005,
+};

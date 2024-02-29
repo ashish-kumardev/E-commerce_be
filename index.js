@@ -6,10 +6,10 @@ const mongoose = require("mongoose");
 const indexConfig = require("./configs/index.config.js");
 const dbConfig = require("./configs/db.config.js");
 const userModel = require("./models/user.model.js");
-const bcryptjs = require("bcryptjs")
+const bcryptjs = require("bcryptjs");
 const app = express();
 
-app.use(express.json()) // Convert JSON to js object
+app.use(express.json()); // Convert JSON to js object
 
 /**
  * Create a admin user at the starting of the application
@@ -27,7 +27,7 @@ db.on("error", () => {
 
 db.once("open", () => {
   console.log("Connecting to mongoDB");
-  init()
+  init();
 });
 
 async function init() {
@@ -39,15 +39,15 @@ async function init() {
     }
 
     user = await userModel.create({
-      name : 'Ashish',
-      userId : 'admin',
-      email : 'ashish@gmail.com',
-      userType : 'ADMIN',
-      password : bcryptjs.hashSync('ASHISH1',8)
-    })
-    console.log("Admin created", user)
+      name: "Ashish",
+      userId: "admin",
+      email: "ashish@gmail.com",
+      userType: "ADMIN",
+      password: bcryptjs.hashSync("ASHISH1", 8),
+    });
+    console.log("Admin created", user);
   } catch (error) {
-    console.log("Error while getting/create admin",error)
+    console.log("Error while getting/create admin", error);
   }
 }
 
@@ -55,7 +55,7 @@ async function init() {
  * Stich the route with server (index.js)
  */
 
-require('./routes/auth.routes.js')(app)
+require("./routes/auth.routes.js")(app);
 
 /**
  * Start the server
