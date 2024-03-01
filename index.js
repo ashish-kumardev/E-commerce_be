@@ -56,6 +56,7 @@ async function init() {
  */
 
 require("./routes/auth.routes.js")(app);
+require("./routes/category.routes.js")(app);
 
 /**
  * Start the server

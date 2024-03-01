@@ -6,7 +6,6 @@
 
 const authController = require("../controllers/auth.controller.js");
 const authMiddleware = require("../middlewares/auth.mw.js");
-
 module.exports = (app) => {
   app.post(
     "/ecomm/api/v1/auth/signup",
