@@ -1,6 +1,7 @@
 /**
  * POST localhost:3005/ecomm/api/v1/auth/signup
  *
+ * POST localhost:3005/ecomm/api/v1/auth/signin
  * I need to intercept this
  */
 
