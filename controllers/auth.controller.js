@@ -74,9 +74,9 @@ exports.signin = async (req, res) => {
         success: false,
         message: "Failed ! password not correct",
       });
-
+                          // token key
     const token = jwt.sign({ id: userObj.userId }, authConfig.SECRET_STRING, {
-      expiresIn: 120,
+      expiresIn: 300, //s
     });
     res.status(200).send({
       success: true,

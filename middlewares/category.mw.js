@@ -63,3 +63,13 @@ exports.verifyUserType = (req, res, next) => {
     });
   }
 };
+
+// 4. update category request content check
+exports.checkDetails = (req, res, next) => {
+  if (!req.body.name && !req.body.description)
+    return res.status(400).send({
+      success: false,
+      message: "Failed ! No content found",
+    });
+  next();
+};
