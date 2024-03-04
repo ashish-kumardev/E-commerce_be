@@ -6,7 +6,9 @@
  *
  * GET localhost:3005/ecomm/api/v1/get_category_by_name/:name
  *
- * POST localhost:3005/ecomm/api/v1/update-category/{category-id}
+ * PUT localhost:3005/ecomm/api/v1/update_category/:id
+ * 
+ * DELETE localhost:3005/ecomm/api/v1/delete_category/:id
  *
  * I need to intercept this
  *
@@ -31,27 +33,31 @@ module.exports = (app) => {
   app.get(
     "/ecomm/api/v1/get_categories",
     [categoryMiddleware.verifyToken, categoryMiddleware.verifyUserType],
-    categoryController.getCategory
+    categoryController.getCategories
   );
 
   // get single category
   app.get(
     "/ecomm/api/v1/get_category_by_name/:name",
-    [
-      categoryMiddleware.verifyToken,
-      categoryMiddleware.verifyUserType,
-    ],
+    [categoryMiddleware.verifyToken, categoryMiddleware.verifyUserType],
     categoryController.getCategoryByName
   );
 
   // update category
   app.put(
-    "/ecomm/api/v1/update-category/:id",
+    "/ecomm/api/v1/update_category/:id",
     [
       categoryMiddleware.checkDetails,
       categoryMiddleware.verifyToken,
       categoryMiddleware.verifyUserType,
     ],
     categoryController.updateCategory
+  );
+
+  // delete category
+  app.delete(
+    "/ecomm/api/v1/delete_category/:id",
+    [categoryMiddleware.verifyToken, categoryMiddleware.verifyUserType],
+    categoryController.deleteCategory
   );
 };
